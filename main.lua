@@ -7,7 +7,7 @@ framework.require = function(path)
     return r and r(h) or error("Failed to load "..path..": DID NOT RETURN VALUE", 2);
 end
 
-table.find = function(self, searching)
+framework.find = function(self, searching)
     for i, v in pairs(self) do
         if v==searching then
             return i;
@@ -15,7 +15,7 @@ table.find = function(self, searching)
     end
 end
 
-string.split = function(self, seperator)
+framework.split = function(self, seperator)
     local returning = {};
     local len = string.len(self);
     local tracking = '';
