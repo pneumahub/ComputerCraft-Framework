@@ -15,16 +15,21 @@ table.find = function(self, searching)
     end
 end
 
-string.split = function(self, start, finish, whitelist, blacklist)
+string.split = function(self, seperator)
     local returning = {};
     local len = string.len(self);
-    for i = math.max(start or 1, 1), math.min(finish or len, len) do
+    local tracking = '';
+    for i = 1, len do
         local v = string.sub(self, i, i);
-        if 
-            (whitelist and table.find(whitelist, v)) or
-            (blacklist and not table.find(whitelist, v)) 
-        then
-            table.insert(returning, v);
+
+        if v == seperator then
+            table.insert(returning, tracking);
+            tracking = '';
+        else
+            tracking = tracking .. v;
+            if i == len then
+                table.insert(returning, tracking);
+            end
         end
     end
     return returning;
